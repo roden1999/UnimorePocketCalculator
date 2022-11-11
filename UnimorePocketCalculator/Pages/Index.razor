@@ -1,0 +1,13 @@
+﻿@page "/"
+
+<MudContainer style="position: page; height: 100vh; width: 100%; background-image: url(images/homescreen.jpg); padding-top: 30%;">
+    <div class="d-flex justify-center">
+        <MudImage Width="250" Height="250" Src="images/upc.png" ObjectPosition="ObjectPosition.Center" />    
+    </div>
+
+    <MudText Typo="Typo.h3" Align="Align.Center">UNIMORE</MudText>
+    <MudText Typo="Typo.h4" Align="Align.Center">Pocket Calculator</MudText>
+
+    <MudText Typo="Typo.subtitle1" Align="Align.Center">@("Copyright @ " + DateTime.Now.Year.ToString())</MudText>
+    <MudText Typo="Typo.subtitle2" Align="Align.Center">V1.0.9</MudText>
+</MudContainer>

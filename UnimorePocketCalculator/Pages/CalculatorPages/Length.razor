@@ -1,0 +1,103 @@
+﻿@page "/length"
+
+<MudContainer Style="padding-top: 10%">
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>Length</b></MudText>
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>@(_length.ToString("N2") != "NaN" ? _length.ToString("N2") : "0")</b></MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center"><b>mm</b></MudText>
+    <div class="d-flex justify-center" style="padding-top: 15px">
+        <MudFab StartIcon="@Icons.Filled.Clear" Label="Clear" Size="Size.Small" Color="Color.Error" OnClick="@clear" />
+        <MudFab StartIcon="@Icons.Filled.Calculate" Label="Compute" Size="Size.Small" Color="Color.Info" OnClick="@Compute" Style="margin-left: 20px;" />
+    </div>
+
+    <div style="padding-top: 15px">
+        <MudNumericField Format="N2" Value="_weight" TextChanged="((e) => OnChangeWeight(e))" Label="Weight" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="Kg/s" AdornmentColor="Color.Info" Min="0" />
+        <br />
+        <MudNumericField Format="N2" Value="_width" TextChanged="((e) => OnChangeWidth(e))" Label="Width" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <br />
+        <MudNumericField Format="N2" Value="_thickness" TextChanged="((e) => OnChangeThickness(e))" Label="Thickness" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <div class="d-flex justify-center">
+            <MudChip>@("Unit Weight: " + _unitWeight + " kg/mm-m2")</MudChip>
+            </div>
+        </div>
+
+        <MudText Typo="Typo.h6" GutterBottom="true">Commercial Length</MudText>
+        <MudPaper Width="100%" Elevation="5">
+            @if (_length > 0 && !Double.IsNaN(_length))
+            {
+                <MudList Clickable="true" Dense="true">
+                    <MudListItem Text="@("2440mm (8FT.) = " + (_length / 2440).ToString("N2") + " PC/S")" />
+                    <MudListItem Text="@("3050mm (10FT.) = " + (_length / 3050).ToString("N2") + " PC/S")" />
+                    <MudListItem Text="@("3660mm (12FT.) = " + (_length / 3660).ToString("N2") + " PC/S")" />
+                    <MudListItem Text="@("3000mm = " + (_length / 3000).ToString("N2") + " PC/S")" />
+                    <MudListItem Text="@("4000mm = " + (_length / 4000).ToString("N2") + " PC/S")" />
+                    <MudListItem Text="@("5000mm = " + (_length / 5000).ToString("N2") + " PC/S")" />
+                    <MudListItem Text="@("6000mm = " + (_length / 6000).ToString("N2") + " PC/S")" />
+                </MudList>
+
+                <MudGrid Spacing="0" Style="padding: 10px">
+                    <MudItem xs="6">
+                        <MudNumericField Format="N2" Value="_customInput" TextChanged="((e) => OnChangeCommercialLength(e))" Label="Commercial Length" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Default" Min="0" />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudChip Size="Size.Large" Label="true">@(_customInput != 0 ? (_length / Convert.ToDouble(_customInput)).ToString("N2") + " PC/S" : "Enter Commercial Length")</MudChip>
+                    </MudItem>
+                </MudGrid>
+            }
+            else
+            {
+                <div class="d-flex justify-center" style="padding-top: 15px; padding-bottom: 15px">
+                    <MudText Typo="Typo.subtitle1" Align="Align.Center">Length must be greater than 0 to view content.</MudText>
+                </div>
+            }
+        </MudPaper>
+        <br/>
+</MudContainer>
+
+@code {
+    double _length = 0;
+    double? _weight;
+    double? _width;
+    double? _thickness;
+    double _unitWeight = 7.85;
+
+    double? _customInput;
+
+    private void clear()
+    {
+        _weight = 0;
+        _width = 0;
+        _thickness = 0;
+    }
+
+    private void Compute()
+    {
+        var a = _weight * 1000000;
+        var b = _width * _thickness * _unitWeight;
+        var result = a / b;
+        _length = Convert.ToDouble(result);
+    }
+
+    private void OnChangeWeight(string e)
+    {
+        _weight = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeWidth(string e)
+    {
+        _width = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeThickness(string e)
+    {
+        _thickness = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeCommercialLength(string e)
+    {
+        _customInput = Convert.ToDouble(e);
+        Compute();
+    }
+}

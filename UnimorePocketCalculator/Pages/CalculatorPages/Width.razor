@@ -1,0 +1,63 @@
+﻿@page "/width"
+
+<MudContainer Style="padding-top: 10%">
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>Width</b></MudText>
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>@_width.ToString("N2")</b></MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center"><b>mm</b></MudText>
+    <div class="d-flex justify-center" style="padding-top: 15px">
+        <MudFab StartIcon="@Icons.Filled.Clear" Label="Clear" Size="Size.Small" Color="Color.Error" OnClick="@clear" />
+        <MudFab StartIcon="@Icons.Filled.Calculate" Label="Compute" Size="Size.Small" Color="Color.Info" OnClick="@Compute" Style="margin-left: 20px;" />
+    </div>
+
+    <div style="padding-top: 15px">
+        <MudNumericField Format="N2" Value="_weight" TextChanged="((e) => OnChangeWeight(e))" Label="Weight" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="Kg/s" AdornmentColor="Color.Info" Min="0" />
+        <br />
+        <MudNumericField Format="N2" Value="_length" TextChanged="((e) => OnChangeLength(e))" Label="Length" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <br />
+        <MudNumericField Format="N2" Value="_thickness" TextChanged="((e) => OnChangeThickness(e))" Label="Thickness" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <div class="d-flex justify-center">
+            <MudChip>@("Unit Weight: " + _unitWeight + " kg/mm-m2")</MudChip>
+            </div>
+        </div>
+    </MudContainer>
+
+    @code {
+    double _width= 0;
+    double? _weight;
+    double? _length;
+    double? _thickness;
+    double _unitWeight = 7.85;
+
+    private void clear()
+    {
+        _weight = 0;
+        _length = 0;
+        _thickness = 0;
+    }
+
+    private void Compute()
+    {
+        var a = _weight * 1000000;
+        var b = _length * _thickness * _unitWeight;
+        var result = a / b;
+        _width = Convert.ToDouble(result);
+    }
+
+    private void OnChangeWeight(string e)
+    {
+        _weight = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeLength(string e)
+    {
+        _length = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeThickness(string e)
+    {
+        _thickness = Convert.ToDouble(e);
+        Compute();
+    }
+}

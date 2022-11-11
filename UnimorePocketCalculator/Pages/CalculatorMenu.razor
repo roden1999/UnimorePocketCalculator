@@ -1,0 +1,180 @@
+﻿@page "/calculatormenu"
+
+<MudContainer Style="background-color: #243441; height: 100vh;">
+<div class="container">
+  <div class="box">
+    <span></span>
+    <div class="content">
+        <div class="d-flex justify-center">
+            <MudImage Width="45" Height="60" Src="images/Default.png" ObjectPosition="ObjectPosition.Center" />
+        </div>
+        <MudText Typo="Typo.body1" Align="Align.Center"><b>Default</b></MudText>
+                <a href="/default">Open</a>
+    </div>
+  </div>
+    <div class="box">
+        <span></span>
+        <div class="content">
+            <div class="d-flex justify-center">
+                <MudImage Width="60" Height="60" Src="images/coil.png" ObjectPosition="ObjectPosition.Center" />
+            </div>
+            <MudText Typo="Typo.body1" Align="Align.Center"><b>Coil Weight</b></MudText>
+                <a href="/coilweight">Open</a>
+        </div>
+    </div>
+    <div class="box">
+        <span></span>
+        <div class="content">
+            <div class="d-flex justify-center">
+                <MudImage Width="60" Height="60" Src="images/weight.png" ObjectPosition="ObjectPosition.Center" />
+            </div>
+            <MudText Typo="Typo.body1" Align="Align.Center"><b>Weight</b></MudText>
+                <a href="/weight">Open</a>
+        </div>
+    </div>
+        <div class="box">
+            <span></span>
+            <div class="content">
+                <div class="d-flex justify-center">
+                    <MudImage Width="60" Height="60" Src="images/length.png" ObjectPosition="ObjectPosition.Center" />
+                </div>
+                <MudText Typo="Typo.body1" Align="Align.Center"><b>Length</b></MudText>
+                <a href="/length">Open</a>
+            </div>
+        </div>
+        <div class="box">
+            <span></span>
+            <div class="content">
+                <div class="d-flex justify-center">
+                    <MudImage Width="60" Height="60" Src="images/width.png" ObjectPosition="ObjectPosition.Center" />
+                </div>
+                <MudText Typo="Typo.body1" Align="Align.Center"><b>Width</b></MudText>
+                <a href="/width">Open</a>
+            </div>
+        </div>
+        <div class="box">
+            <span></span>
+            <div class="content">
+                <div class="d-flex justify-center">
+                    <MudImage Width="60" Height="60" Src="images/thickness.png" ObjectPosition="ObjectPosition.Center" />
+                </div>
+                <MudText Typo="Typo.body1" Align="Align.Center"><b>Thickness</b></MudText>
+                <a href="/thickness">Open</a>
+            </div>
+        </div>
+        <div class="box">
+            <span></span>
+            <div class="content">
+                <div class="d-flex justify-center">
+                    <MudImage Width="60" Height="60" Src="images/age.png" ObjectPosition="ObjectPosition.Center" />
+                </div>
+                <MudText Typo="Typo.body1" Align="Align.Center"><b>Age</b></MudText>
+                <a href="/agecalculator">Open</a>
+            </div>
+        </div>
+</div>
+</MudContainer>
+
+@{/*<MudContainer Fixed="true">
+    <MudGrid Spacing="2" Justify="Justify.Center" Style="padding: 20px">
+            <MudItem xs="6">
+                <MudPaper>
+                <MudCard>
+                        <MudCardContent>
+                        <div class="container">
+                        <div class="box">
+                            <span></span>
+                            <div class="content">
+                                    <div class="d-flex justify-center">
+                                        <MudImage Width="45" Height="60" Src="images/Default.png" ObjectPosition="ObjectPosition.Center" />
+                                    </div>
+                                    <h2>Default</h2>
+                                    <p>Basic Calculator</p>
+                            </div>
+                        </div>
+                        </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudPaper>
+            </MudItem>
+            
+            <MudItem xs="6">
+                <MudPaper>
+                <MudCard Elevation="1">
+                        <MudCardContent>
+                            <div>
+                                <div class="d-flex justify-center">
+                                    <MudImage Width="60" Height="60" Src="images/coil.png" ObjectPosition="ObjectPosition.Center" />
+                                </div>
+                            <MudText Typo="Typo.body1" Align="Align.Center"><b>Coil Weight</b></MudText>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudPaper>
+            </MudItem>            
+
+            <MudItem xs="6">
+                <MudPaper>
+                <MudCard Elevation="1">
+                        <MudCardContent>
+                            <div>
+                                <div class="d-flex justify-center">
+                                    <MudImage Width="60" Height="60" Src="images/weight.png" ObjectPosition="ObjectPosition.Center" />
+                                </div>
+                                <MudText Typo="Typo.body1" Align="Align.Center">Weight</MudText>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudPaper>
+            </MudItem>
+
+        <MudItem xs="6">
+            <MudPaper>
+                <MudCard Elevation="1">
+                    <MudCardContent>
+                        <div>
+                            <div class="d-flex justify-center">
+                                <MudImage Width="60" Height="60" Src="images/length.png" ObjectPosition="ObjectPosition.Center" />
+                            </div>
+                            <MudText Typo="Typo.body1" Align="Align.Center"><b>Length</b></MudText>
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="6">
+            <MudPaper>
+                <MudCard Elevation="1">
+                    <MudCardContent>
+                        <div>
+                            <div class="d-flex justify-center">
+                                <MudImage Width="60" Height="60" Src="images/width.png" ObjectPosition="ObjectPosition.Center" />
+                            </div>
+                            <MudText Typo="Typo.body1" Align="Align.Center"><b>Width</b></MudText>
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="6">
+            <MudPaper>
+                <MudCard Elevation="1">
+                    <MudCardContent>
+                        <div>
+                            <div class="d-flex justify-center">
+                                <MudImage Width="60" Height="60" Src="images/thickness.png" ObjectPosition="ObjectPosition.Center" />
+                            </div>
+                            <MudText Typo="Typo.body1" Align="Align.Center"><b>Thickness</b></MudText>
+                        </div>
+                    </MudCardContent>
+                </MudCard>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>*/}
+
+@code {
+
+}

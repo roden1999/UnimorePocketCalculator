@@ -1,0 +1,54 @@
+﻿@page "/gaugechart"
+
+@using System.Net.Http.Json
+
+@using UnimorePocketCalculator.Data
+@inject GuageChartService GuageChartService
+
+<MudContainer Style="padding: 10px;">
+    @if (_guage == null)
+    {
+            <p><em>Loading...</em></p>
+    }
+    else 
+    {
+        <div>
+            <ToolBarContent>
+                <MudText Typo="Typo.h5" Align="Align.Center"><b>Gauge Size Standard</b></MudText>
+                <MudSpacer />
+            </ToolBarContent>
+        </div>
+        <MudSimpleTable Dense="true" FixedHeader="true" Striped="true" Bordered="true" Hover="true" Style="overflow-x: auto; height: 85vh;">
+            <thead>
+                <tr>
+                    @foreach (var h in headings)
+                    {
+                        <th>@h</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var row in _guage)
+                {
+                    <tr>
+                        <td>@row.Guage</td>
+                        <td>@row.Inches</td>
+                        <td>@row.Mm</td>
+                        <td>@row.LbFt2</td>
+                        <td>@row.KgM2</td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    }
+</MudContainer>
+
+@code {
+    string[] headings = { "Gauge", "in", "mm", "lb/ft2", "kg/m2" };
+    private Data.GuageChart[] _guage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _guage = await GuageChartService.GetGuageAsync();
+    }
+}

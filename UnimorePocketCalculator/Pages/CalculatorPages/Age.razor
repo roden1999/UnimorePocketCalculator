@@ -1,0 +1,49 @@
+﻿@page "/agecalculator"
+
+@inject ISnackbar Snackbar
+
+<MudContainer Style="padding: 20px; height: 100vh">
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>AGE</b></MudText>
+    <MudText Typo="Typo.h2" Align="Align.Center"><b>@(_output)</b></MudText>
+
+    <MudDatePicker Label="Date of Birth" Date="date1" DateChanged="((e) => OnChangeDate1(e))" Mask="@(new DateMask("MM/dd/yyyy"))" DateFormat="MM/dd/yyyy" Placeholder="Select Date" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Filled.Cake" AdornmentColor="Color.Info"/>
+    <br/>
+    <MudDatePicker Label="Age at this Date" Date="date2" DateChanged="((e) => OnChangeDate2(e))" Mask="@(new DateMask("MM/dd/yyyy"))" DateFormat="MM/dd/yyyy" Placeholder="Select Date" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Filled.CalendarMonth" AdornmentColor="Color.Info"/>
+</MudContainer>
+
+@code {
+    int _output = 0;
+    DateTime date1 = DateTime.Now;
+    DateTime date2 = DateTime.Now;
+
+    private void Compute()
+    {
+        var result = date2.Year - date1.Year;
+        _output = result;
+    }
+
+    private void OnChangeDate1(DateTime? e)
+    {
+        if (e > date2)
+        {
+            Snackbar.Add("Date of Birth must not greater than Age at this Date!", Severity.Error);
+        }
+        else {
+            date1 = Convert.ToDateTime(e);
+            Compute();
+        }
+    }
+
+    private void OnChangeDate2(DateTime? e)
+    {
+        if (e < date1)
+        {
+            Snackbar.Add("Date of Birth must not greater than Age at this Date!", Severity.Error);
+        }
+        else 
+        {
+            date2 = Convert.ToDateTime(e);
+            Compute();
+        }
+    }
+}

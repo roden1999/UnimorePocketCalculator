@@ -1,0 +1,92 @@
+﻿@page "/weight"
+
+<MudContainer Style="padding-top: 10%">
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>Weight</b></MudText>
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>@_weight.ToString("N2")</b></MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center"><b>Kg/s</b></MudText>
+    <div class="d-flex justify-center" style="padding-top: 15px">
+        <MudFab StartIcon="@Icons.Filled.Clear" Label="Clear" Size="Size.Small" Color="Color.Error" OnClick="@clear" />
+        <MudFab StartIcon="@Icons.Filled.Calculate" Label="Compute" Size="Size.Small" Color="Color.Info" OnClick="@Compute" Style="margin-left: 20px;" />
+    </div>
+
+    <div style="padding-top: 15px">
+        <MudNumericField Format="N2" Value="_length" TextChanged="((e) => OnChangeLength(e))" Label="Length" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <br />
+        <MudNumericField Format="N2" Value="_width" TextChanged="((e) => OnChangeWidth(e))" Label="Width" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <br />
+        <MudNumericField Format="N2" Value="_thickness" TextChanged="((e) => OnChangeThickness(e))" Label="Thickness" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <div class="d-flex justify-center">
+            <MudChip>@("Unit Weight: " + _unitWeight + " kg/mm-m2")</MudChip>
+            </div>
+        </div>
+
+        <MudText Typo="Typo.h6" GutterBottom="true">Commercial Weight</MudText>
+        @if (_weight != 0)
+        {
+            <MudGrid Spacing="0" Style="padding: 10px">
+                <MudItem xs="6">
+                            <MudNumericField Format="N2" Value="_customInput" TextChanged="((e) => OnChangeCommercialWeight(e))" Label="Commercial Length" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Default" Min="0" />
+                        </MudItem>
+                        <MudItem xs="6">
+                            <MudChip Size="Size.Large" Label="true">@(_customInput != 0 ? (Convert.ToDouble(_customInput) * _weight).ToString("#,#.00") + " PC/S" : "Enter Commercial Length")</MudChip>
+                        </MudItem>
+            </MudGrid>
+        }
+        else
+        {
+            <MudPaper Width="100%" Elevation="5">
+                <div class="d-flex justify-center" style="padding-top: 15px; padding-bottom: 15px">
+                    <MudText Typo="Typo.subtitle1" Align="Align.Center">Weight must be greater than 0 to view content.</MudText>
+                </div>
+            </MudPaper>
+        }
+    </MudContainer>
+
+    @code {
+    double _weight = 0;
+    double? _length;
+    double? _width;
+    double? _thickness;
+    double _unitWeight = 7.85;
+
+    double? _customInput;
+
+    private void clear()
+    {
+        _length = 0;
+        _width = 0;
+        _thickness = 0;
+    }
+
+    private void Compute()
+    {
+        var a = (_length * _width) * _thickness * _unitWeight;
+        var b = 1000000;
+        var result = a / b;
+        _weight = Convert.ToDouble(result);
+    }
+
+    private void OnChangeLength(string e)
+    {
+        _length = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeWidth(string e)
+    {
+        _width = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeThickness(string e)
+    {
+        _thickness = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeCommercialWeight(string e)
+    {
+        _customInput = Convert.ToDouble(e);
+        Compute();
+    }
+}

@@ -1,0 +1,63 @@
+﻿@page "/coilweight"
+
+<MudContainer Style="padding-top: 10%">
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>Coil Weight</b></MudText>
+    <MudText Typo="Typo.h4" Align="Align.Center"><b>@_weight.ToString("N2")</b></MudText>
+    <MudText Typo="Typo.h6" Align="Align.Center"><b>Kg/s</b></MudText>
+    <div class="d-flex justify-center" style="padding-top: 15px">
+        <MudFab StartIcon="@Icons.Filled.Clear" Label="Clear" Size="Size.Small" Color="Color.Error" OnClick="@clear" />
+        <MudFab StartIcon="@Icons.Filled.Calculate" Label="Compute" Size="Size.Small" Color="Color.Info" OnClick="@Compute" Style="margin-left: 20px;" />
+    </div>
+
+    <div style="padding-top: 15px">
+        <MudNumericField Format="N2" Value="_outsideDiameter" TextChanged="((e) => OnChangeOutsideDiameter(e))" Label="Outside Diameter" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <br/>
+        <MudNumericField Format="N2" Value="_insideDiameter" TextChanged="((e) => OnChangeInsideDiameter(e))" Label="Inside Diameter" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <br />
+        <MudNumericField Format="N2" Value="_coilWidth" TextChanged="((e) => OnChangeCoilWidth(e))" Label="Coil Width" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <div class="d-flex justify-center">
+            <MudChip>@("Unit Weight: " + _unitWeight + " kg/mm-m2")</MudChip>
+        </div>
+    </div>
+</MudContainer>
+
+    @code {
+    double _weight = 0;
+    double? _outsideDiameter;
+    double? _insideDiameter;
+    double? _coilWidth;
+    double _unitWeight = 7.85;
+
+    private void clear() 
+    {
+        _outsideDiameter = 0;
+        _insideDiameter = 0;
+        _coilWidth = 0;
+    }
+
+    private void Compute() 
+    {
+        var a = ((_outsideDiameter / 1000) * (_outsideDiameter / 1000) * 3.1416 / 4) - ((_insideDiameter / 1000) * (_insideDiameter / 1000) * 3.1416 / 4);
+        var b = a * _coilWidth * _unitWeight;
+        var result = b;
+        _weight = Convert.ToDouble(result);
+    }
+
+    private void OnChangeOutsideDiameter(string e) 
+    {
+        _outsideDiameter = Convert.ToDouble(e);
+        Compute(); 
+    }
+
+    private void OnChangeInsideDiameter(string e)
+    {
+        _insideDiameter = Convert.ToDouble(e);
+        Compute(); 
+    }
+
+    private void OnChangeCoilWidth(string e)
+    {
+        _coilWidth = Convert.ToDouble(e);
+        Compute();
+    }
+}
