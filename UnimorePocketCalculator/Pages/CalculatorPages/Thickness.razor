@@ -10,11 +10,11 @@
     </div>
 
     <div style="padding-top: 15px">
-        <MudNumericField Format="N2" Value="_weight" TextChanged="((e) => OnChangeWeight(e))" Label="Outside Diameter" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="Kg/s" AdornmentColor="Color.Info" Min="0" />
+        <MudNumericField Format="N2" Value="_weight" TextChanged="((e) => OnChangeWeight(e))" Label="Weight" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="Kg/s" AdornmentColor="Color.Info" Min="0" />
         <br />
-        <MudNumericField Format="N2" Value="_length" TextChanged="((e) => OnChangeLength(e))" Label="Inside Diameter" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <MudNumericField Format="N2" Value="_length" TextChanged="((e) => OnChangeLength(e))" Label="Length" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
         <br />
-        <MudNumericField Format="N2" Value="_width" TextChanged="((e) => OnChangeWidth(e))" Label="Coil Width" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
+        <MudNumericField Format="N2" Value="_width" TextChanged="((e) => OnChangeWidth(e))" Label="Width" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentText="mm" AdornmentColor="Color.Info" Min="0" />
         <div class="d-flex justify-center">
             <MudChip>@("Unit Weight: " + _unitWeight + " kg/mm-m2")</MudChip>
             </div>

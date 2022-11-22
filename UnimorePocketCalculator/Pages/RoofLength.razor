@@ -1,14 +1,53 @@
 ﻿@page "/rooflength"
 
 <MudContainer Style="height: 100vh; padding-top: 20px">
-    <MudCard Elevation="3">
+    <MudCard Elevation="5">
         <MudCardMedia Image="images/roofLengthDrawing.jpg" Height="200" />
-        <MudCardContent>
-            <MudImage Width="150" Height="50" Src="images/roofLengthFormula.jpg" ObjectPosition="ObjectPosition.Center" />
-        </MudCardContent>
     </MudCard>
+
+    <div style="padding-top: 30px">
+        <MudText Typo="Typo.h3" Align="Align.Center"><b>C = @(_c)</b></MudText>
+        <div class="d-flex justify-center" style="padding-top: 15px">
+            <MudFab StartIcon="@Icons.Filled.Clear" Label="Clear" Size="Size.Small" Color="Color.Error" OnClick="@clear" />
+            <MudFab StartIcon="@Icons.Filled.Calculate" Label="Compute" Size="Size.Small" Color="Color.Info" OnClick="@Compute" Style="margin-left: 20px;" />
+        </div>
+
+        <div style="padding-top: 15px">
+            <MudNumericField Format="N2" Value="_a" TextChanged="((e) => OnChangeA(e))" Label="" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentText="A =" AdornmentColor="Color.Info" Min="0" />
+            <br />
+            <MudNumericField Format="N2" Value="_b" TextChanged="((e) => OnChangeB(e))" Label="" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentText="B =" AdornmentColor="Color.Info" Min="0" />
+        </div>
+    </div>
 </MudContainer>
 
 @code {
+    double _c = 0;
+    double? _a;
+    double? _b;
 
+    private void Compute()
+    {
+        var formula = (_a * _a) + (_b * _b);
+        var result = Math.Sqrt(Convert.ToDouble(formula));
+        _c = Convert.ToDouble(result);
+    }
+
+    private void clear()
+    {
+        _c = 0;
+        _a = 0;
+        _b = 0;
+    }
+
+    private void OnChangeA(string e)
+    {
+        _a = Convert.ToDouble(e);
+        Compute();
+    }
+
+    private void OnChangeB(string e)
+    {
+        _b = Convert.ToDouble(e);
+        Compute();
+    }
 }
