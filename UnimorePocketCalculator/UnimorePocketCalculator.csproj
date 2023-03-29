@@ -21,8 +21,8 @@
         <ApplicationIdGuid>B430BC83-8AA3-451F-B4B8-09C10627F137</ApplicationIdGuid>
 
         <!-- Versions -->
-        <ApplicationDisplayVersion>1.1.1</ApplicationDisplayVersion>
-        <ApplicationVersion>11</ApplicationVersion>
+        <ApplicationDisplayVersion>1.1.2</ApplicationDisplayVersion>
+        <ApplicationVersion>12</ApplicationVersion>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>
@@ -69,7 +69,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MudBlazor" Version="6.0.17" />
+      <PackageReference Include="MudBlazor" Version="6.2.0" />
+      <PackageReference Include="System.IO" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup>

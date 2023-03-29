@@ -19,6 +19,9 @@
     private void Compute()
     {
         var result = date2.Year - date1.Year;
+        if (date2.DayOfYear < date1.DayOfYear)
+            result = result - 1;
+
         _output = result;
     }
 
