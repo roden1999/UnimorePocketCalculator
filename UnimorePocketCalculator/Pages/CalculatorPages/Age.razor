@@ -6,9 +6,9 @@
     <MudText Typo="Typo.h4" Align="Align.Center"><b>AGE</b></MudText>
     <MudText Typo="Typo.h2" Align="Align.Center"><b>@(_output)</b></MudText>
 
-    <MudDatePicker Label="Date of Birth" Date="date1" DateChanged="((e) => OnChangeDate1(e))" Mask="@(new DateMask("MM/dd/yyyy"))" DateFormat="MM/dd/yyyy" Placeholder="Select Date" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Filled.Cake" AdornmentColor="Color.Info"/>
+    <MudDatePicker Label="Date of Birth" Date="date1" DateChanged="((e) => OnChangeDate1(e))" Mask="@(new DateMask("MM/dd/yyyy"))" DateFormat="MM/dd/yyyy" Placeholder="Select Date" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Cake" AdornmentColor="Color.Info"/>
     <br/>
-    <MudDatePicker Label="Age at this Date" Date="date2" DateChanged="((e) => OnChangeDate2(e))" Mask="@(new DateMask("MM/dd/yyyy"))" DateFormat="MM/dd/yyyy" Placeholder="Select Date" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Filled.CalendarMonth" AdornmentColor="Color.Info"/>
+    <MudDatePicker Label="Age at this Date" Date="date2" DateChanged="((e) => OnChangeDate2(e))" Mask="@(new DateMask("MM/dd/yyyy"))" DateFormat="MM/dd/yyyy" Placeholder="Select Date" Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.CalendarMonth" AdornmentColor="Color.Info"/>
 </MudContainer>
 
 @code {
